@@ -4,7 +4,7 @@ $db_host = "localhost";
 #資料庫使用者帳號
 $db_user = "root";
 #資料庫使用者密碼
-$db_password = "Ilove$520";
+$db_password = "";
 #資料庫名稱
 $db_name = "web3000";
 #PHP 5.2.9以後

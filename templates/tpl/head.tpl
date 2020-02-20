@@ -9,14 +9,16 @@
             <a href="index.php#event">Event</a>
             <a href="index.php#menu-list">Menu</a>
             <a href="index.php#contact">Book a table</a>
-            <{if $smarty.session.admin}>
+            <{if $smarty.session.user.kind === 1}>
             <{* 管理員   *}>
-              <a href="user.php">Administer</a>         
-              <a href="index.php?op=logout">Log Out</a>       
+              <a class="nav-link js-scroll-trigger" href="user.php">admin</a>
+              <a class="nav-link js-scroll-trigger" href="index.php?op=logout">logout</a>       
+            <{elseif $smarty.session.user.kind === 0}>           
+              <a class="nav-link js-scroll-trigger" href="index.php?op=logout">logout</a>          
             <{else}>
-            <{* 未登入  *}>        
-              <a href="index.php?op=login_form">Login</a>                     
-            <{/if}>       
+            <{* 未登入  *}>            
+              <a class="nav-link js-scroll-trigger" href="index.php?op=login_form">login</a>                       
+            <{/if}>>       
           </div>
             <!-- Use any element to open the sidenav -->
             <span onclick="openNav()" class="pull-right menu-icon" style="color: black;">☰</span>

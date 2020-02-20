@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2020-02-18 04:06:13
+/* Smarty version 3.1.34-dev-7, created on 2020-02-20 13:10:13
   from 'D:\xampp\htdocs\web3000\templates\tpl\head.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5e4b54a53306f6_62302846',
+  'unifunc' => 'content_5e4e772525e1c7_56861943',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '2a6ad693ba9b83f58288f909c80002c04bf5c032' => 
     array (
       0 => 'D:\\xampp\\htdocs\\web3000\\templates\\tpl\\head.tpl',
-      1 => 1581995170,
+      1 => 1582200605,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5e4b54a53306f6_62302846 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5e4e772525e1c7_56861943 (Smarty_Internal_Template $_smarty_tpl) {
 ?><section>
     <!-- <div class="bg-color"> -->
       <header id="header">
@@ -32,13 +32,15 @@ function content_5e4b54a53306f6_62302846 (Smarty_Internal_Template $_smarty_tpl)
             <a href="index.php#event">Event</a>
             <a href="index.php#menu-list">Menu</a>
             <a href="index.php#contact">Book a table</a>
-            <?php if ($_SESSION['admin']) {?>
-                          <a href="user.php">Administer</a>         
-              <a href="index.php?op=logout">Log Out</a>       
+            <?php if ($_SESSION['user']['kind'] === 1) {?>
+                          <a class="nav-link js-scroll-trigger" href="user.php">admin</a>
+              <a class="nav-link js-scroll-trigger" href="index.php?op=logout">logout</a>       
+            <?php } elseif ($_SESSION['user']['kind'] === 0) {?>           
+              <a class="nav-link js-scroll-trigger" href="index.php?op=logout">logout</a>          
             <?php } else { ?>
-                    
-              <a href="index.php?op=login_form">Login</a>                     
-            <?php }?>       
+                        
+              <a class="nav-link js-scroll-trigger" href="index.php?op=login_form">login</a>                       
+            <?php }?>>       
           </div>
             <!-- Use any element to open the sidenav -->
             <span onclick="openNav()" class="pull-right menu-icon" style="color: black;">☰</span>

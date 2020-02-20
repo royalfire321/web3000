@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2020-02-16 12:03:26
+/* Smarty version 3.1.34-dev-7, created on 2020-02-20 13:01:27
   from 'D:\xampp\htdocs\web3000\templates\tpl\login_form.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5e49217e98bc78_44227168',
+  'unifunc' => 'content_5e4e7517a768a5_52544611',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'cb6ecbf392c74c50e76be8126cedc49a99db3cdb' => 
     array (
       0 => 'D:\\xampp\\htdocs\\web3000\\templates\\tpl\\login_form.tpl',
-      1 => 1581762507,
+      1 => 1582200029,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5e49217e98bc78_44227168 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5e4e7517a768a5_52544611 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 		<style>
 			.form-signin {
@@ -35,7 +35,7 @@ function content_5e49217e98bc78_44227168 (Smarty_Internal_Template $_smarty_tpl)
 						<h1 class="h3 mb-3 font-weight-normal">會員登入</h1>
 						<div class="mb-3">
 						<label for="name" class="sr-only">帳號</label>
-						<input type="text" name="name" id="name" class="form-control" placeholder="請輸入帳號"  required>
+						<input type="text" name="uname" id="uname" class="form-control" placeholder="請輸入帳號"  required>
 						</div>
 						<div class="mb-3">
 						<label for="pass" class="sr-only">密碼</label>

@@ -31,6 +31,9 @@ require_once _WEB_PATH.'/smarty.php';
 require_once _WEB_PATH.'/sqlConfig.php';
 #引入設定檔
 require_once _WEB_PATH . '/function.php';
+#引入訂位表單函式
+require_once _WEB_PATH . '/booking.php';
+
 
 $_SESSION['user']['kind'] = isset($_SESSION['user']['kind']) ? $_SESSION['user']['kind'] : "";
 # 為了cookie使用

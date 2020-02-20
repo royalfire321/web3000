@@ -75,30 +75,68 @@ function reg_form(){
 }
 
 function login(){
-  global $smarty;
-  $name="admin";
-  $pass="111111";
-  $token="xxxxxx";
+  global $db;
+  $_POST['uname'] = db_filter($_POST['uname'], '帳號');
+  $_POST['pass'] = db_filter($_POST['pass'], '密碼');
 
-  if($name == $_POST['name'] and $pass == $_POST['pass']){
-    $_SESSION['admin'] = true; 
+  $sql="SELECT *
+        FROM `users`
+        WHERE `uname` = '{$_POST['uname']}'
+  ";
+
+  $result = $db->query($sql) or die($db->error() . $sql);
+  $row = $result->fetch_assoc() or redirect_header("index.php", "帳號輸入錯誤" , 3000);
+  
+  $row['uname'] = htmlspecialchars($row['uname']);//字串
+  $row['uid'] = (int)$row['uid'];//整數
+  $row['kind'] = (int)$row['kind'];//整數
+  $row['name'] = htmlspecialchars($row['name']);//字串
+  $row['tel'] = htmlspecialchars($row['tel']);//字串
+  $row['email'] = htmlspecialchars($row['email']);//字串 
+  $row['pass'] = htmlspecialchars($row['pass']);//字串 
+  $row['token'] = htmlspecialchars($row['token']);//字串
+
+  if(password_verify($_POST['pass'], $row['pass'])){
+    //登入成功
+    $_SESSION['user']['uid'] = $row['uid'];
+    $_SESSION['user']['uname'] = $row['uname'];
+    $_SESSION['user']['name'] = $row['name'];
+    $_SESSION['user']['tel'] = $row['tel'];
+    $_SESSION['user']['email'] = $row['email'];
+    $_SESSION['user']['kind'] = $row['kind'];
+    
     $_POST['remember'] = isset($_POST['remember']) ? $_POST['remember'] : "";
     
     if($_POST['remember']){
-      setcookie("name", $name, time()+ 3600 * 24 * 365*10); 
-      setcookie("token", $token, time()+ 3600 * 24 * 365*10); 
+      setcookie("uname",$row['uname'], time()+ 3600 * 24 * 365); 
+      setcookie("token", $row['token'], time()+ 3600 * 24 * 365); 
     }
     return "登入成功";
-  }else{ 
+  }else{    
+    $_SESSION['user']['uid'] = "";
+    $_SESSION['user']['uname'] = "";
+    $_SESSION['user']['name'] = "";
+    $_SESSION['user']['tel'] = "";
+    $_SESSION['user']['email'] = "";
+    $_SESSION['user']['kind'] = "";
+
     return "登入失敗";
   }
 }
 
-function logout(){
-  $_SESSION['admin']="";
-  setcookie("name", "", time()- 3600 * 24 * 365); 
+
+function logout(){   
+  $_SESSION['user']['uid'] = "";
+  $_SESSION['user']['uname'] = "";
+  $_SESSION['user']['name'] = "";
+  $_SESSION['user']['tel'] = "";
+  $_SESSION['user']['email'] = "";
+  $_SESSION['user']['kind'] = "";
+  
+  setcookie("uname", "", time()- 3600 * 24 * 365); 
   setcookie("token", "", time()- 3600 * 24 * 365);
 }
+ 
  
 /*=======================
 註冊函式(寫入資料庫)
@@ -143,7 +181,7 @@ function reg(){
   $sql="INSERT INTO `users` (`uname`, `pass`, `name`, `tel`, `email`, `token`)
   VALUES ('{$_POST['uname']}', '{$_POST['pass']}', '{$_POST['name']}', '{$_POST['tel']}', '{$_POST['email']}', '{$_POST['token']}');";
 
-  $db->query($sql) ;
+  $db->query($sql) or die($db->error() . $sql);
   $uid = $db->insert_id;
 
 
