@@ -17,6 +17,11 @@ switch ($op){
     redirect_header("user.php", $msg, 3000);
     exit;
 
+  case "op_delete" :
+    $msg = op_delete($uid);
+    redirect_header("user.php", $msg, 3000);
+    exit;
+  
   case "op_form" :
     $msg = op_form($uid);
     break;
@@ -34,7 +39,14 @@ $smarty->assign("op", $op);
 $smarty->display('admin.tpl');
  
 /*---- 函數區-----*/
-
+function op_delete($uid){
+  global $db; 
+  $sql="DELETE FROM `orders`
+        WHERE `uid` = '{$uid}'
+  ";
+  $db->query($sql) or die($db->error() . $sql);
+  return "會員資料刪除成功";
+}
 
 
 function op_list(){
@@ -106,11 +118,11 @@ function op_list(){
           `time` = '{$_POST['time']}',
           `phone` = '{$_POST['phone']}',
           `people` = '{$_POST['people']}',
-          `message` = '{$_POST['message']}',
+          `message` = '{$_POST['message']}'
 
-          WHERE `uid` = '{$uid}';  
+          WHERE `uid` = '{$uid}'
     ";//die($sql);
-    $db->query($sql) ;
+    $db->query($sql) or die($db->error() . $sql); ;
     return "會員資料更新成功";
   
   }

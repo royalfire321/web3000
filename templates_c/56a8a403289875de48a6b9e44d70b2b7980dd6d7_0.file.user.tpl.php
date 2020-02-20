@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2020-02-19 14:05:40
+/* Smarty version 3.1.34-dev-7, created on 2020-02-20 12:15:05
   from 'D:\xampp\htdocs\web3000\templates\tpl\user.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5e4d32a41dd907_66115578',
+  'unifunc' => 'content_5e4e6a390016d7_84655623',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '56a8a403289875de48a6b9e44d70b2b7980dd6d7' => 
     array (
       0 => 'D:\\xampp\\htdocs\\web3000\\templates\\tpl\\user.tpl',
-      1 => 1582117519,
+      1 => 1582197299,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5e4d32a41dd907_66115578 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5e4e6a390016d7_84655623 (Smarty_Internal_Template $_smarty_tpl) {
 if ($_smarty_tpl->tpl_vars['op']->value == "op_list") {?>
     <table class="table table-striped table-bordered table-hover table-sm">
         <thead>
@@ -60,6 +60,8 @@ foreach ($_from as $_smarty_tpl->tpl_vars['row']->value) {
 </td>
                     <td><a href="user.php?op=op_form&uid=<?php echo $_smarty_tpl->tpl_vars['row']->value['uid'];?>
 "><i class="far fa-edit"></i></a>
+                    <a href="javascript:void(0)" onclick="op_delete(<?php echo $_smarty_tpl->tpl_vars['row']->value['uid'];?>
+);"><i class="far fa-trash-alt"></i></a>
                     </td>
                 </tr>
             <?php
@@ -75,6 +77,32 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 
         </tbody>
     </table>
+    <link rel="stylesheet" href="<?php echo $_smarty_tpl->tpl_vars['xoAppUrl']->value;?>
+class/sweetalert2/sweetalert2.min.css">
+    <?php echo '<script'; ?>
+ src="<?php echo $_smarty_tpl->tpl_vars['xoAppUrl']->value;?>
+class/sweetalert2/sweetalert2.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+>
+        function op_delete(uid){
+            Swal.fire({
+                title: '你確定嗎？',
+                text: "您將無法還原！",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '是的，刪除它！',
+                cancelButtonText: '取消'
+                }).then((result) => {
+                if (result.value) {
+                    document.location.href="user.php?op=op_delete&uid="+uid;
+                }
+            })
+        }
+    <?php echo '</script'; ?>
+>
 <?php }?>
 
 <?php if ($_smarty_tpl->tpl_vars['op']->value == "op_form") {?>
